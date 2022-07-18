@@ -1,2 +1,4 @@
 dwavebinarycsp
 dwave-system
+matplotlib
+dwave-inspector
