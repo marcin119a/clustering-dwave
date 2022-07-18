@@ -39,7 +39,6 @@ def main(scattered_points, filename, problem_inspector):
             # Set up weight
             d = get_distance(coord0, coord1) / max_distance  # rescale distance
             weight = -math.cos(d*math.pi)
-
             # Apply weights to BQM
             bqm.add_interaction(coord0.r, coord1.r, weight)
             bqm.add_interaction(coord0.g, coord1.g, weight)
@@ -82,10 +81,16 @@ def main(scattered_points, filename, problem_inspector):
     # Note: This is simply a more compact version of 'best_sample'
     print(groupings)
 
+from numpy import genfromtxt
 
 if __name__ == "__main__":
     # Simple, hardcoded data set
-    scattered_points = [(0, 0), (1, 1), (2, 4), (3, 2)]
+    my_data = genfromtxt('sub-CN4105/ses-baseline/dwi/connect_matrix_norm.csv', delimiter=',')
+    scattered_points = []
+    for x in range(my_data.shape[0]):
+        for y in range(my_data.shape[1]):
+            if my_data[x,y] > 0:
+                scattered_points.append((x,y))
 
     # Save the original, un-clustered plot
     orig_filename = "four_points.png"
