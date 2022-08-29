@@ -1,4 +1,3 @@
-dwavebinarycsp
+dimod
 dwave-system
 matplotlib
-dwave-inspector
