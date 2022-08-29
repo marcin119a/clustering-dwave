@@ -7,7 +7,6 @@ Original file is located at
     https://colab.research.google.com/drive/15bMAU3FrXFr_VCSgXfo5U7ao_RJnJq1o
 """
 
-!pip install dimod dwave-system
 
 import networkx as nx
 import numpy as np
