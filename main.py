@@ -7,8 +7,8 @@ import time
 import matplotlib.pyplot as plt
 import networkx.algorithms.community as nx_comm
 
-def main(folder):
-    A = genfromtxt('data/Edge_AAL90_Binary.csv', delimiter='	')
+def main(folder, data_name):
+    A = genfromtxt(f'data/{data_name}.csv', delimiter='	')
     G = nx.from_numpy_matrix(A)
     B = nx.modularity_matrix(G)
     
@@ -25,7 +25,7 @@ def main(folder):
             print(communities)
 
             data = [nx_comm.modularity(G, communities_class),  nx_comm.modularity(G, communities), communities, run_time, energy, counts, sample, communities_class, total_time]
-            with open(f'{folder}/run{k}_{r}.csv', 'w') as file:
+            with open(f'{folder}/{data_name}run{k}_{r}.csv', 'w') as file:
                 writer = csv.writer(file)
                 writer.writerow(data)
             file.close()
@@ -37,7 +37,7 @@ def main(folder):
             f = plt.figure()
 
             nx.draw(G, node_color=color_map, with_labels=True, ax=f.add_subplot(111))
-            f.savefig(f"{folder}/graph{k}_{r}.png")
+            f.savefig(f"{folder}/{data_name}graph{k}_{r}.png")
 
             clus = np.zeros((len(G.nodes), 2))
 
@@ -45,7 +45,7 @@ def main(folder):
                 clus[i, 0] = node
                 clus[i, 1] = sample[node]
 
-            np.savetxt(f"{folder}/clustering{k}_{r}.csv", clus, delimiter=",")
+            np.savetxt(f"{folder}/{data_name}clustering{k}_{r}.csv", clus, delimiter=",")
 
 if __name__ == '__main__':
-    main(folder='output')
+    main(folder='output', data_name='Edge_Dos160_Binary')
