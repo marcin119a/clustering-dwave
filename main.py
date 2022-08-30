@@ -13,17 +13,18 @@ def main(folder):
     B = nx.modularity_matrix(G)
     
 
-    for k in [4, 11]:
-        for r in range(10):
+    for k in [11]:
+        for r in range(1):
             communities, run_time, energy, counts, sample = modularization(G, B, k) #a former version has been used with additional parameters B,k; basic algorithm the same as in later evaluation
-            communities_class = nx_comm.louvain_communities(G, seed=123)
 
             start = time.time()
-            nx_comm.modularity(G, nx_comm.label_propagation_communities(G))
+            communities_class = nx_comm.louvain_communities(G, seed=123)
+            
             end = time.time()
             total_time = end - start
+            print(communities)
 
-            data = [communities, run_time, energy, counts, sample, communities_class, total_time]
+            data = [nx_comm.modularity(G, communities_class),  nx_comm.modularity(G, communities), communities, run_time, energy, counts, sample, communities_class, total_time]
             with open(f'{folder}/run{k}_{r}.csv', 'w') as file:
                 writer = csv.writer(file)
                 writer.writerow(data)
