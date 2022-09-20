@@ -35,7 +35,7 @@ def modularization(G, B, num_partitions):
 
 
   # Initialize the DQM solver
-  sampler = LeapHybridDQMSampler(token='DEV-b1e20d4b8484c8c21e6bd035a200465a1a59e82e')
+  sampler = LeapHybridDQMSampler(token='here token for D-WAVE')
 
   # Solve the problem using the DQM solver
   sampleset = sampler.sample_dqm(dqm)
