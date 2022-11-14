@@ -13,8 +13,8 @@ def main(folder, data_name):
     B = nx.modularity_matrix(G)
     
 
-    for k in [10]:
-        for r in range(1):
+    for k in [4]:
+        for r in range(5):
             communities, run_time, energy, counts, sample = modularization(G, B, k) #a former version has been used with additional parameters B,k; basic algorithm the same as in later evaluation
 
             start = time.time()
@@ -50,4 +50,4 @@ def main(folder, data_name):
             np.savetxt(f"{folder}/{data_name}clustering{k}_{r}.csv", clus, delimiter=",")
 
 if __name__ == '__main__':
-    main(folder='output', data_name='Edge_HOA112_Binary.remove')
+    main(folder='output', data_name='Edge_AAL90_Binary')
